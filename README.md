@@ -100,3 +100,8 @@ GROUP BY
 ORDER BY
     Year, Month;
 ```
+## Star Schema / ERD
+
+![Star Schema ERD](images/star_schema_erd.png)
+
+The cleaned Olist dataset was loaded into SQL Server and transformed into a star schema model. The model contains a central FactOrderItems table connected to dimension tables for customers, sellers, products, orders, payments, and dates. The staging table was used only during the ETL process and was removed from the final ERD.
