@@ -1,107 +1,225 @@
 # Brazilian E-Commerce Analytics (Olist Dataset)
 
-## Overview
-
-This project analyzes the Brazilian Olist E-Commerce dataset to uncover business insights related to customer behavior, sales performance, seller effectiveness, and product trends.
-
-The project demonstrates an end-to-end analytics workflow including:
-
-- Data Cleaning & Validation
-- ETL Development
-- SQL Analytics
-- KPI Reporting
-- Power BI Dashboard Development
-- Business Insight Generation
+An end-to-end Business Intelligence and Data Analytics project using the Brazilian Olist E-Commerce dataset. This project demonstrates the complete analytics pipeline, including ETL, dimensional data modeling, SQL analysis, SSAS Tabular modeling, and Power BI dashboard development.
 
 ---
 
-## Business Problem
+## Project Overview
 
-E-commerce businesses generate large volumes of transactional data but often lack visibility into customer behavior, sales performance, and operational efficiency.
+This project transforms raw Brazilian e-commerce data into a business intelligence solution using a modern analytics workflow.
 
-This project aims to transform raw transactional data into actionable insights that support data-driven business decisions.
+The project covers:
+
+- Data cleaning and preprocessing using Alteryx
+- SQL Server data warehouse implementation
+- Star schema dimensional modeling
+- SSAS Tabular model development
+- SQL business analysis
+- Interactive Power BI dashboards
 
 ---
 
-## Objectives
+## Tech Stack
 
-- Clean and validate raw datasets
-- Build an analytics-ready data model
-- Analyze customer purchasing patterns
-- Evaluate seller and product performance
-- Develop business KPIs
-- Create interactive dashboards for stakeholders
+| Tool | Purpose |
+|------|---------|
+| Alteryx | ETL & Data Cleaning |
+| SQL Server (SSMS) | Data Warehouse |
+| SSAS Tabular | Semantic Data Model |
+| SQL | Business Analysis |
+| Power BI | Dashboard & Visualization |
 
 ---
 
 ## Dataset
 
-Source:
-Brazilian Olist E-Commerce Dataset
+**Source**
 
-Tables used:
+Brazilian E-Commerce Public Dataset by Olist
+
+https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+
+The dataset contains information on:
 
 - Customers
+- Sellers
+- Products
 - Orders
-- Order Items
 - Payments
 - Reviews
-- Products
-- Sellers
-- Geolocation
+- Delivery information
+- Product category translations
 
 ---
 
-## Data Cleaning & ETL
+# Project Workflow
 
-### Data Validation
-
-- Duplicate detection
-- Missing value analysis
-- Referential integrity checks
-- Data type validation
-
-### Data Transformation
-
-- Table joins
-- Feature engineering
-- KPI calculations
-- Date dimension creation
-
-### Output
-
-A cleaned and structured dataset suitable for analytics and reporting.
-
----
-
-## SQL Analysis
-
-Example business questions:
-
-- Which product categories generate the most revenue?
-- Who are the top-performing sellers?
-- What are the monthly sales trends?
-- How frequently do customers make purchases?
-- Which regions generate the highest sales?
-
-Example SQL Query:
-
-```sql
-SELECT
-    YEAR(order_purchase_timestamp) AS Year,
-    MONTH(order_purchase_timestamp) AS Month,
-    SUM(payment_value) AS Revenue
-FROM orders o
-JOIN order_payments p
-    ON o.order_id = p.order_id
-GROUP BY
-    YEAR(order_purchase_timestamp),
-    MONTH(order_purchase_timestamp)
-ORDER BY
-    Year, Month;
 ```
-## Star Schema / ERD
+Raw CSV Files
+        │
+        ▼
+Alteryx ETL
+        │
+        ▼
+SQL Server Staging Table
+        │
+        ▼
+Star Schema
+        │
+        ▼
+SSAS Tabular Model
+        │
+        ▼
+SQL Analysis
+        │
+        ▼
+Power BI Dashboard
+```
 
-![Star Schema ERD](images/star_schema_erd.png)
+---
 
-The cleaned Olist dataset was loaded into SQL Server and transformed into a star schema model. The model contains a central FactOrderItems table connected to dimension tables for customers, sellers, products, orders, payments, and dates. The staging table was used only during the ETL process and was removed from the final ERD.
+# Repository Structure
+
+```
+Brazilian-E-Commerce-Analytics
+│
+├── README.md
+├── data
+├── sql
+├── powerbi
+├── images
+└── docs
+```
+
+---
+
+# ETL Process
+
+The raw Olist datasets were imported into Alteryx where the following transformations were performed:
+
+- Removed duplicate records
+- Removed invalid records
+- Handled missing values
+- Standardized data types
+- Converted date fields
+- Translated Portuguese product categories into English
+- Created calculated fields
+- Joined multiple datasets into a unified staging table
+- Exported the cleaned data into SQL Server
+
+---
+
+# Data Warehouse
+
+Database
+
+```
+OlistECommerce
+```
+
+The final warehouse follows a star schema consisting of one fact table and six dimension tables.
+
+### Fact Table
+
+- FactOrderItems
+
+### Dimension Tables
+
+- DimCustomer
+- DimDate
+- DimOrder
+- DimPayment
+- DimProduct
+- DimSeller
+
+---
+
+# Entity Relationship Diagram
+
+*(Insert screenshot after uploading)*
+
+```
+images/star_schema_erd.png
+```
+
+---
+
+# SQL Schema
+
+The SQL schema used to create the data warehouse is available in:
+
+```
+sql/schema.sql
+```
+
+---
+
+# SQL Business Analysis
+
+Business analysis queries include:
+
+- Monthly sales trend
+- Top-selling product categories
+- Top customers by revenue
+- Payment method analysis
+- Delivery performance
+
+Source:
+
+```
+sql/analysis_queries.sql
+```
+
+*(Coming in Role 4)*
+
+---
+
+# Power BI Dashboard
+
+Interactive dashboards will provide insights into:
+
+- Sales Performance
+- Customer Analysis
+- Product Performance
+- Seller Analysis
+- Delivery Performance
+
+*(Coming in Role 5)*
+
+---
+
+# Project Highlights
+
+✔ ETL using Alteryx
+
+✔ Star Schema Data Warehouse
+
+✔ SQL Server Implementation
+
+✔ SSAS Tabular Model
+
+✔ SQL Business Analysis
+
+✔ Interactive Power BI Dashboard
+
+---
+
+# Future Improvements
+
+- Incremental ETL pipelines
+- Data quality validation automation
+- Power BI deployment to Power BI Service
+- Advanced DAX measures
+- Predictive analytics using Python
+
+---
+
+# Author
+
+**Cheung Pang Li**
+
+LinkedIn:
+*(your LinkedIn URL)*
+
+GitHub:
+*(your GitHub profile)*
