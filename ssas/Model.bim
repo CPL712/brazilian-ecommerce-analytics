@@ -1,0 +1,550 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1500,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/localhost;OlistECommerceDW",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "localhost",
+            "database": "OlistECommerceDW"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "Username": "LAPTOP-79Q723H6\\cpL",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "DimCustomer",
+        "columns": [
+          {
+            "name": "CustomerID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "CustomerID"
+          },
+          {
+            "name": "CustomerUniqueID",
+            "dataType": "string",
+            "sourceColumn": "CustomerUniqueID"
+          },
+          {
+            "name": "CustomerZipCodePrefix",
+            "dataType": "int64",
+            "sourceColumn": "CustomerZipCodePrefix"
+          },
+          {
+            "name": "CustomerCity",
+            "dataType": "string",
+            "sourceColumn": "CustomerCity"
+          },
+          {
+            "name": "CustomerState",
+            "dataType": "string",
+            "sourceColumn": "CustomerState"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;OlistECommerceDW\",",
+                "    dbo_DimCustomer = Source{[Schema=\"dbo\",Item=\"DimCustomer\"]}[Data]",
+                "in",
+                "    dbo_DimCustomer"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimDate",
+        "columns": [
+          {
+            "name": "DateID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "DateID"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Date"
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "Year"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "int64",
+            "sourceColumn": "Quarter"
+          },
+          {
+            "name": "QuarterName",
+            "dataType": "string",
+            "sourceColumn": "QuarterName"
+          },
+          {
+            "name": "Month",
+            "dataType": "int64",
+            "sourceColumn": "Month"
+          },
+          {
+            "name": "MonthName",
+            "dataType": "string",
+            "sourceColumn": "MonthName"
+          },
+          {
+            "name": "Day",
+            "dataType": "int64",
+            "sourceColumn": "Day"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;OlistECommerceDW\",",
+                "    dbo_DimDate = Source{[Schema=\"dbo\",Item=\"DimDate\"]}[Data]",
+                "in",
+                "    dbo_DimDate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimOrder",
+        "columns": [
+          {
+            "name": "OrderID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "OrderID"
+          },
+          {
+            "name": "OrderStatus",
+            "dataType": "string",
+            "sourceColumn": "OrderStatus"
+          },
+          {
+            "name": "OrderPurchaseTimestamp",
+            "dataType": "dateTime",
+            "sourceColumn": "OrderPurchaseTimestamp"
+          },
+          {
+            "name": "OrderApprovedAt",
+            "dataType": "dateTime",
+            "sourceColumn": "OrderApprovedAt"
+          },
+          {
+            "name": "OrderDeliveredCarrierDate",
+            "dataType": "dateTime",
+            "sourceColumn": "OrderDeliveredCarrierDate"
+          },
+          {
+            "name": "OrderDeliveredCustomerDate",
+            "dataType": "dateTime",
+            "sourceColumn": "OrderDeliveredCustomerDate"
+          },
+          {
+            "name": "OrderEstimatedDeliveryDate",
+            "dataType": "dateTime",
+            "sourceColumn": "OrderEstimatedDeliveryDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;OlistECommerceDW\",",
+                "    dbo_DimOrder = Source{[Schema=\"dbo\",Item=\"DimOrder\"]}[Data]",
+                "in",
+                "    dbo_DimOrder"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimPayment",
+        "columns": [
+          {
+            "name": "PaymentID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "PaymentID"
+          },
+          {
+            "name": "OrderID",
+            "dataType": "string",
+            "sourceColumn": "OrderID"
+          },
+          {
+            "name": "PaymentSequential",
+            "dataType": "int64",
+            "sourceColumn": "PaymentSequential"
+          },
+          {
+            "name": "PaymentType",
+            "dataType": "string",
+            "sourceColumn": "PaymentType"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;OlistECommerceDW\",",
+                "    dbo_DimPayment = Source{[Schema=\"dbo\",Item=\"DimPayment\"]}[Data]",
+                "in",
+                "    dbo_DimPayment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimProduct",
+        "columns": [
+          {
+            "name": "ProductID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ProductID"
+          },
+          {
+            "name": "ProductCategoryNameEnglish",
+            "dataType": "string",
+            "sourceColumn": "ProductCategoryNameEnglish"
+          },
+          {
+            "name": "ProductNameLength",
+            "dataType": "double",
+            "sourceColumn": "ProductNameLength"
+          },
+          {
+            "name": "ProductDescriptionLength",
+            "dataType": "double",
+            "sourceColumn": "ProductDescriptionLength"
+          },
+          {
+            "name": "ProductPhotosQty",
+            "dataType": "double",
+            "sourceColumn": "ProductPhotosQty"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;OlistECommerceDW\",",
+                "    dbo_DimProduct = Source{[Schema=\"dbo\",Item=\"DimProduct\"]}[Data]",
+                "in",
+                "    dbo_DimProduct"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimSeller",
+        "columns": [
+          {
+            "name": "SellerID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "SellerID"
+          },
+          {
+            "name": "SellerZipCodePrefix",
+            "dataType": "int64",
+            "sourceColumn": "SellerZipCodePrefix"
+          },
+          {
+            "name": "SellerCity",
+            "dataType": "string",
+            "sourceColumn": "SellerCity"
+          },
+          {
+            "name": "SellerState",
+            "dataType": "string",
+            "sourceColumn": "SellerState"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;OlistECommerceDW\",",
+                "    dbo_DimSeller = Source{[Schema=\"dbo\",Item=\"DimSeller\"]}[Data]",
+                "in",
+                "    dbo_DimSeller"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "FactOrderItems",
+        "columns": [
+          {
+            "name": "FactOrderItemID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FactOrderItemID"
+          },
+          {
+            "name": "OrderID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "OrderID"
+          },
+          {
+            "name": "CustomerID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "CustomerID"
+          },
+          {
+            "name": "ProductID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ProductID"
+          },
+          {
+            "name": "SellerID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "SellerID"
+          },
+          {
+            "name": "PaymentID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "PaymentID"
+          },
+          {
+            "name": "DateID",
+            "dataType": "int64",
+            "sourceColumn": "DateID"
+          },
+          {
+            "name": "OrderItemID",
+            "dataType": "int64",
+            "sourceColumn": "OrderItemID"
+          },
+          {
+            "name": "Price",
+            "dataType": "double",
+            "sourceColumn": "Price"
+          },
+          {
+            "name": "FreightValue",
+            "dataType": "double",
+            "sourceColumn": "FreightValue"
+          },
+          {
+            "name": "PaymentValue",
+            "dataType": "double",
+            "sourceColumn": "PaymentValue"
+          },
+          {
+            "name": "PaymentInstallments",
+            "dataType": "int64",
+            "sourceColumn": "PaymentInstallments"
+          },
+          {
+            "name": "ProductWeightG",
+            "dataType": "double",
+            "sourceColumn": "ProductWeightG"
+          },
+          {
+            "name": "ProductLengthCm",
+            "dataType": "double",
+            "sourceColumn": "ProductLengthCm"
+          },
+          {
+            "name": "ProductHeightCm",
+            "dataType": "double",
+            "sourceColumn": "ProductHeightCm"
+          },
+          {
+            "name": "ProductWidthCm",
+            "dataType": "double",
+            "sourceColumn": "ProductWidthCm"
+          },
+          {
+            "name": "DeliveryDays",
+            "dataType": "int64",
+            "sourceColumn": "DeliveryDays"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;OlistECommerceDW\",",
+                "    dbo_FactOrderItems = Source{[Schema=\"dbo\",Item=\"FactOrderItems\"]}[Data]",
+                "in",
+                "    dbo_FactOrderItems"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Total Sales",
+            "expression": " SUM(FactOrderItems[Price])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Total Freight",
+            "expression": " SUM(FactOrderItems[FreightValue])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Total Payment Value",
+            "expression": " SUM(FactOrderItems[PaymentValue])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Total Orders",
+            "expression": " DISTINCTCOUNT(FactOrderItems[OrderID])",
+            "formatString": "0"
+          },
+          {
+            "name": "Total Order Items",
+            "expression": " COUNTROWS(FactOrderItems)",
+            "formatString": "0"
+          },
+          {
+            "name": "Average Delivery Days",
+            "expression": " AVERAGE(FactOrderItems[DeliveryDays])",
+            "formatString": "0.00"
+          },
+          {
+            "name": "Average Order Value",
+            "expression": " DIVIDE([Total Sales],[Total Orders])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "77a3177d-4e66-4809-86a4-9ea7324498ea",
+        "fromTable": "FactOrderItems",
+        "fromColumn": "CustomerID",
+        "toTable": "DimCustomer",
+        "toColumn": "CustomerID"
+      },
+      {
+        "name": "1cddcf0d-0f7f-41c8-8a5c-94c321e13a1b",
+        "fromTable": "FactOrderItems",
+        "fromColumn": "DateID",
+        "toTable": "DimDate",
+        "toColumn": "DateID"
+      },
+      {
+        "name": "f02b642e-785c-4f29-b28a-60b6d8673e21",
+        "fromTable": "FactOrderItems",
+        "fromColumn": "OrderID",
+        "toTable": "DimOrder",
+        "toColumn": "OrderID"
+      },
+      {
+        "name": "64cf3abc-3011-4b60-84fb-7fd68356fab5",
+        "fromTable": "FactOrderItems",
+        "fromColumn": "PaymentID",
+        "toTable": "DimPayment",
+        "toColumn": "PaymentID"
+      },
+      {
+        "name": "73d29367-8bd0-48d2-bf58-f2f74b9b302d",
+        "fromTable": "FactOrderItems",
+        "fromColumn": "ProductID",
+        "toTable": "DimProduct",
+        "toColumn": "ProductID"
+      },
+      {
+        "name": "3c93469c-b6f1-4a49-bcc7-2fdc657cadea",
+        "fromTable": "FactOrderItems",
+        "fromColumn": "SellerID",
+        "toTable": "DimSeller",
+        "toColumn": "SellerID"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
