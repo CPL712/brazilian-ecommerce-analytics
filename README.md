@@ -84,7 +84,7 @@ Main preprocessing tasks included:
 
 ### ETL Workflow
 
-![ETL Workflow](images/etl_workflow.png)
+![ETL Workflow](image/etl_workflow.png)
 
 ---
 
@@ -113,7 +113,7 @@ Warehouse design follows the **Kimball Star Schema** methodology.
 
 ### Star Schema
 
-![Star Schema](images/star_schema_erd.png)
+![Star Schema](image/star_schema_erd.png)
 
 ---
 
@@ -141,7 +141,7 @@ Implemented features include:
 
 ### SSAS Model
 
-![SSAS Model](images/ssas_model.png)
+![SSAS Model](image/ssas_model.png)
 
 ---
 
