@@ -136,11 +136,9 @@ The final warehouse follows a star schema consisting of one fact table and six d
 
 # Entity Relationship Diagram
 
-*(Insert screenshot after uploading)*
 
-```
-images/star_schema_erd.png
-```
+![Project Screenshot](images/star_schema_erd.png)
+
 
 ---
 
