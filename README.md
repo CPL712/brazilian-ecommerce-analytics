@@ -1,76 +1,65 @@
-# Brazilian E-Commerce Analytics (Olist Dataset)
+# 🇧🇷 Brazilian E-Commerce Analytics (Olist Dataset)
 
-An end-to-end Business Intelligence and Data Analytics project using the Brazilian Olist E-Commerce dataset. This project demonstrates the complete analytics pipeline, including ETL, dimensional data modeling, SQL analysis, SSAS Tabular modeling, and Power BI dashboard development.
+An end-to-end Business Intelligence and Data Warehousing project built using the Brazilian Olist E-Commerce Dataset. This project demonstrates a complete BI pipeline, from data preprocessing and ETL to dimensional modeling, SSAS Tabular semantic modeling, SQL business analysis, and interactive Power BI dashboards.
 
 ---
 
 ## Project Overview
 
-This project transforms raw Brazilian e-commerce data into a business intelligence solution using a modern analytics workflow.
+This project transforms raw Brazilian e-commerce transactional data into a business-ready data warehouse for analytical reporting and decision-making.
 
-The project covers:
+The workflow includes:
 
 - Data cleaning and preprocessing using Alteryx
-- SQL Server data warehouse implementation
-- Star schema dimensional modeling
-- SSAS Tabular model development
+- SQL Server dimensional data warehouse design
+- Star schema implementation
+- SSAS Tabular semantic model development
 - SQL business analysis
-- Interactive Power BI dashboards
+- Power BI dashboard creation
 
 ---
 
-## Tech Stack
+## Technology Stack
 
 | Tool | Purpose |
 |------|---------|
-| Alteryx | ETL & Data Cleaning |
-| SQL Server (SSMS) | Data Warehouse |
-| SSAS Tabular | Semantic Data Model |
-| SQL | Business Analysis |
+| Alteryx | ETL, Data Cleaning, Data Integration |
+| SQL Server | Data Warehouse |
+| SSMS | Database Design & SQL Analysis |
+| SSAS Tabular | Semantic Model & Measures |
 | Power BI | Dashboard & Visualization |
+| GitHub | Project Documentation |
 
 ---
 
-## Dataset
-
-**Source**
-
-Brazilian E-Commerce Public Dataset by Olist
-
-https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
-
-The dataset contains information on:
-
-- Customers
-- Sellers
-- Products
-- Orders
-- Payments
-- Reviews
-- Delivery information
-- Product category translations
-
----
-
-# Project Workflow
+# Project Architecture
 
 ```
-Raw CSV Files
+Kaggle Olist Dataset
         │
         ▼
-Alteryx ETL
+Alteryx ETL Workflow
         │
         ▼
-SQL Server Staging Table
+SQL Server Data Warehouse
+(OlistECommerceDW)
+        │
+        ├── Staging Table
+        │      └── olist_joint_data_cleaned
         │
         ▼
 Star Schema
         │
-        ▼
-SSAS Tabular Model
+        ├── DimCustomer
+        ├── DimDate
+        ├── DimOrder
+        ├── DimPayment
+        ├── DimProduct
+        ├── DimSeller
+        └── FactOrderItems
         │
         ▼
-SQL Analysis
+SSAS Tabular Model
         │
         ▼
 Power BI Dashboard
@@ -78,46 +67,36 @@ Power BI Dashboard
 
 ---
 
-# Repository Structure
-
-```
-Brazilian-E-Commerce-Analytics
-│
-├── README.md
-├── data
-├── sql
-├── powerbi
-├── images
-└── docs
-```
-
----
-
 # ETL Process
 
-The raw Olist datasets were imported into Alteryx where the following transformations were performed:
+The ETL workflow was developed in **Alteryx**.
 
-- Removed duplicate records
-- Removed invalid records
-- Handled missing values
-- Standardized data types
-- Converted date fields
-- Translated Portuguese product categories into English
-- Created calculated fields
-- Joined multiple datasets into a unified staging table
-- Exported the cleaned data into SQL Server
+Main preprocessing tasks included:
+
+- Removing invalid records
+- Handling missing values
+- Removing duplicates
+- Data type conversion
+- Joining multiple Olist datasets
+- Product category translation (Portuguese → English)
+- Data validation
+- Exporting the cleaned dataset into SQL Server
+
+### ETL Workflow
+
+![ETL Workflow](images/etl_workflow.png)
 
 ---
 
-# Data Warehouse
+# SQL Server Data Warehouse
 
-Database
+Database:
 
 ```
-OlistECommerce
+OlistECommerceDW
 ```
 
-The final warehouse follows a star schema consisting of one fact table and six dimension tables.
+Warehouse design follows the **Kimball Star Schema** methodology.
 
 ### Fact Table
 
@@ -132,89 +111,120 @@ The final warehouse follows a star schema consisting of one fact table and six d
 - DimProduct
 - DimSeller
 
----
+### Star Schema
 
-# Entity Relationship Diagram
-
-
-![Project Screenshot](images/star_schema_erd.png)
-
+![Star Schema](images/star_schema_erd.png)
 
 ---
 
-# SQL Schema
+# SSAS Tabular Model
 
-The SQL schema used to create the data warehouse is available in:
+The semantic layer was implemented using SQL Server Analysis Services (SSAS) Tabular.
 
-```
-sql/schema.sql
-```
+Implemented features include:
+
+- Imported warehouse tables
+- Relationship management
+- Business measures using DAX
+- Hidden surrogate keys for cleaner reporting
+- Aggregated business metrics
+
+### DAX Measures
+
+- Total Sales
+- Total Freight
+- Total Payment Value
+- Total Orders
+- Total Order Items
+- Average Delivery Days
+- Average Order Value
+
+### SSAS Model
+
+![SSAS Model](images/ssas_model.png)
 
 ---
 
 # SQL Business Analysis
 
-Business analysis queries include:
+Business questions answered include:
 
-- Monthly sales trend
-- Top-selling product categories
-- Top customers by revenue
+- Sales performance
+- Product category ranking
+- Top performing sellers
+- Customer distribution
 - Payment method analysis
-- Delivery performance
 
-Source:
+SQL scripts are available in:
 
 ```
 sql/analysis_queries.sql
 ```
 
-*(Coming in Role 4)*
-
 ---
 
 # Power BI Dashboard
 
-Interactive dashboards will provide insights into:
+Interactive dashboards include:
 
-- Sales Performance
-- Customer Analysis
+- Sales Overview
 - Product Performance
+- Customer Analysis
 - Seller Analysis
-- Delivery Performance
+- Payment Insights
 
-*(Coming in Role 5)*
+Power BI file:
+
+```
+powerbi/Brazilian_Ecommerce.pbix
+```
 
 ---
 
-# Project Highlights
+# Repository Structure
 
-✔ ETL using Alteryx
-
-✔ Star Schema Data Warehouse
-
-✔ SQL Server Implementation
-
-✔ SSAS Tabular Model
-
-✔ SQL Business Analysis
-
-✔ Interactive Power BI Dashboard
+```
+Brazilian-E-Commerce-Analytics
+│
+├── data/
+│   └── cleaned_data_description.md
+│
+├── sql/
+│   ├── schema.sql
+│   └── analysis_queries.sql
+│
+├── ssas/
+│   ├── Model.bim
+│   ├── OlistECommerce_SSAS.smproj
+│   └── OlistECommerce_SSAS.sln
+│
+├── powerbi/
+│   └── Brazilian_Ecommerce.pbix
+│
+├── images/
+│   ├── etl_workflow.png
+│   ├── sql_server_tables.png
+│   ├── star_schema_erd.png
+│   └── ssas_model.png
+│
+└── README.md
+```
 
 ---
 
 # Future Improvements
 
-- Incremental ETL pipelines
-- Data quality validation automation
-- Power BI deployment to Power BI Service
-- Advanced DAX measures
-- Predictive analytics using Python
+- Incremental ETL pipeline
+- Automated SQL Agent jobs
+- Azure SQL Database deployment
+- Azure Analysis Services / Power BI Service
+- Sales forecasting using machine learning
 
 ---
 
 # Author
 
-**Cheung Pang Li**
+Cheung Pang Li
 
 LinkedIn:
 *(your LinkedIn URL)*
